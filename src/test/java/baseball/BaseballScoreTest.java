@@ -7,9 +7,9 @@ import static org.mockito.Mockito.when;
 
 import baseball.domain.BaseballNumbers;
 import baseball.domain.input.InputNumbers;
-import baseball.domain.score.ScorePredicate;
-import baseball.domain.score.impl.BallScorePredicate;
-import baseball.domain.score.impl.StrikeScorePredicate;
+import baseball.domain.score.ScoreFunction;
+import baseball.domain.score.impl.BallScoreFunction;
+import baseball.domain.score.impl.StrikeScoreFunction;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
@@ -30,14 +30,14 @@ public class BaseballScoreTest {
         private MockedStatic<Console> console;
         private BaseballNumbers baseballNumbers;
         private InputNumbers inputNumbers;
-        private ScorePredicate strikeScorePredicate;
+        private ScoreFunction strikeScoreFunction;
 
         @BeforeEach
         void before() {
             console = mockStatic(Console.class);
             baseballNumbers = mock(BaseballNumbers.class);
             inputNumbers = new InputNumbers();
-            strikeScorePredicate = new StrikeScorePredicate();
+            strikeScoreFunction = new StrikeScoreFunction();
         }
 
         @AfterEach
@@ -45,7 +45,7 @@ public class BaseballScoreTest {
             console.close();
         }
 
-        void strikePredicateMocking(String input) {
+        void strikeFunctionMocking(String input) {
             when(baseballNumbers.getBaseballNumber())
                     .thenReturn(Arrays.asList(1,3,5));
             when(Console.readLine())
@@ -58,9 +58,9 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"246", "789" , "351" , "513"})
         void zero_strike_test(String input) {
-            strikePredicateMocking(input);
+            strikeFunctionMocking(input);
 
-            int result = strikeScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(0, result);
         }
 
@@ -68,9 +68,9 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"124", "153" , "245" , "234"})
         void one_strike_test(String input) {
-            strikePredicateMocking(input);
+            strikeFunctionMocking(input);
 
-            int result = strikeScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(1, result);
         }
 
@@ -78,9 +78,9 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"134", "125" , "138" , "235"})
         void two_strike_test(String input) {
-            strikePredicateMocking(input);
+            strikeFunctionMocking(input);
 
-            int result = strikeScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(2, result);
         }
 
@@ -88,9 +88,9 @@ public class BaseballScoreTest {
         @Test
         void three_strike_test() {
             String input = "135";
-            strikePredicateMocking(input);
+            strikeFunctionMocking(input);
 
-            int result = strikeScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(3, result);
         }
     }
@@ -101,14 +101,14 @@ public class BaseballScoreTest {
         private MockedStatic<Console> console;
         private BaseballNumbers baseballNumbers;
         private InputNumbers inputNumbers;
-        private ScorePredicate ballScorePredicate;
+        private ScoreFunction ballScoreFunction;
 
         @BeforeEach
         void before() {
             console = mockStatic(Console.class);
             baseballNumbers = mock(BaseballNumbers.class);
             inputNumbers = new InputNumbers();
-            ballScorePredicate = new BallScorePredicate();
+            ballScoreFunction = new BallScoreFunction();
         }
 
         @AfterEach
@@ -116,7 +116,7 @@ public class BaseballScoreTest {
             console.close();
         }
 
-        void ballPredicateMocking(String input) {
+        void ballFunctionMocking(String input) {
             List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
 
             when(baseballNumbers.getBaseballNumber())
@@ -136,9 +136,9 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"246" , "135" , "137"})
         void zero_ball_test(String input) {
-            ballPredicateMocking(input);
+            ballFunctionMocking(input);
 
-            int result = ballScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(0, result);
         }
 
@@ -146,9 +146,9 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"324" , "567" , "398"})
         void one_ball_test(String input) {
-            ballPredicateMocking(input);
+            ballFunctionMocking(input);
 
-            int result = ballScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(1, result);
         }
 
@@ -156,9 +156,9 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"512", "514" , "312" , "359"})
         void two_ball_test(String input) {
-            ballPredicateMocking(input);
+            ballFunctionMocking(input);
 
-            int result = ballScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(2, result);
         }
 
@@ -166,9 +166,9 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"513" , "351"})
         void three_ball_test(String input) {
-            ballPredicateMocking(input);
+            ballFunctionMocking(input);
 
-            int result = ballScorePredicate.execute(inputNumbers, baseballNumbers);
+            int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(3, result);
         }
     }
