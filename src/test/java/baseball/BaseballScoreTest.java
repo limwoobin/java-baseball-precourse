@@ -47,7 +47,7 @@ public class BaseballScoreTest {
         when(Console.readLine())
                 .thenReturn(input);
 
-        inputNumbers.createInputNumbers();
+        inputNumbers = inputNumbers.receiveInputNumbers();
     }
 
     void ballFunctionMocking(String input, List<Integer> 컴퓨터가_생성한_난수) {
@@ -56,9 +56,9 @@ public class BaseballScoreTest {
         when(Console.readLine())
                 .thenReturn(input);
 
-        List<Integer> 유저가_입력한_값 = inputNumbers.createInputNumbers();
+        InputNumbers 유저가_입력한_값 = inputNumbers.receiveInputNumbers();
 
-        for (int number : 유저가_입력한_값) {
+        for (int number : 유저가_입력한_값.getInputNumbers()) {
             when(baseballNumbers.isContains(number))
                     .thenReturn(컴퓨터가_생성한_난수.contains(number));
         }

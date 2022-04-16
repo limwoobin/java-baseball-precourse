@@ -7,17 +7,18 @@ import java.util.List;
 
 public class InputNumbers {
     private List<Integer> inputNumbers;
+    private InputNumbersValidationCheck validationCheck;
 
     public InputNumbers() {
         inputNumbers = new ArrayList<>();
+        validationCheck = new InputNumbersValidationCheck();
     }
 
-    public List<Integer> createInputNumbers() {
-        InputNumbersValidationCheck validationCheck = new InputNumbersValidationCheck();
+    public InputNumbers receiveInputNumbers() {
         String inputValue = getUserInput();
         validationCheck.validate(inputValue);
         this.inputNumbers = stringToIntegerList(inputValue);
-        return inputNumbers;
+        return this;
     }
 
     public List<Integer> getInputNumbers() {

@@ -108,7 +108,8 @@ public class InputNumbersTest {
             when(Console.readLine())
                     .thenReturn(input);
 
-            List<Integer> result = inputNumbers.createInputNumbers();
+            InputNumbers 유저_입력_값 = inputNumbers.receiveInputNumbers();
+            List<Integer> result = 유저_입력_값.getInputNumbers();
             String[] inputValues = input.split("");
 
             assertThat(result.get(0)).isEqualTo(Integer.parseInt(inputValues[0]));
@@ -141,7 +142,7 @@ public class InputNumbersTest {
             when(Console.readLine())
                     .thenReturn(input);
 
-            assertThatThrownBy(inputNumbers::createInputNumbers).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(inputNumbers::receiveInputNumbers).isInstanceOf(IllegalArgumentException.class);
         }
     }
 }
