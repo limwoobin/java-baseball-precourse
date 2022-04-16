@@ -17,6 +17,7 @@ public class BaseballGame {
     private boolean inProgress;
 
     public void start() {
+        inProgress = true;
         BaseballNumbers baseballNumbers = new BaseballNumbers();
         InputNumbers inputNumbers = new InputNumbers();
         GameResult gameResult = new GameResult(new StrikeScoreFunction(), new BallScoreFunction());
