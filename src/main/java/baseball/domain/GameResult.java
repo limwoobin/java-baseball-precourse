@@ -2,8 +2,6 @@ package baseball.domain;
 
 import baseball.domain.input.InputNumbers;
 import baseball.domain.score.ScoreFunction;
-import baseball.domain.score.impl.BallScoreFunction;
-import baseball.domain.score.impl.StrikeScoreFunction;
 
 public class GameResult {
     private final ScoreFunction strikeScoreFunction;
@@ -11,11 +9,11 @@ public class GameResult {
     private int strikeCount;
     private int ballCount;
 
-    public GameResult() {
+    public GameResult(ScoreFunction strikeScoreFunction, ScoreFunction ballScoreFunction) {
         this.strikeCount = 0;
         this.ballCount = 0;
-        this.strikeScoreFunction = new StrikeScoreFunction();
-        this.ballScoreFunction = new BallScoreFunction();
+        this.strikeScoreFunction = strikeScoreFunction;
+        this.ballScoreFunction = ballScoreFunction;
     }
 
     public boolean isGameOver() {

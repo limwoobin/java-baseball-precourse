@@ -187,7 +187,7 @@ public class BaseballScoreTest {
             strikeFunctionMocking(input, 컴퓨터가_생성한_난수);
             ballFunctionMocking(input, 컴퓨터가_생성한_난수);
 
-            GameResult gameResult = new GameResult();
+            GameResult gameResult = new GameResult(new StrikeScoreFunction(), new BallScoreFunction());
             gameResult.calculateScore(inputNumbers, baseballNumbers);
 
             assertEquals(0, gameResult.getStrikeCount());
