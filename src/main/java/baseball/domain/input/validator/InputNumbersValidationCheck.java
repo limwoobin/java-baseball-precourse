@@ -7,7 +7,6 @@ public class InputNumbersValidationCheck {
     private final InputNumbersSizeValidator sizeValidator;
     private final InputNumbersNumberFormatValidator numberFormatValidator;
     private final InputNumbersOverlapValidator overlapValidator;
-    private final InputNumbersSpaceValidator spaceValidator;
     private final InputNumbersZeroValidator zeroValidator;
     private final List<InputNumbersValidator> inputNumbersValidators;
 
@@ -15,14 +14,12 @@ public class InputNumbersValidationCheck {
         this.sizeValidator = new InputNumbersSizeValidator();
         this.numberFormatValidator = new InputNumbersNumberFormatValidator();
         this.overlapValidator = new InputNumbersOverlapValidator();
-        this.spaceValidator = new InputNumbersSpaceValidator();
         this.zeroValidator = new InputNumbersZeroValidator();
 
         this.inputNumbersValidators = Arrays.asList(
                 sizeValidator,
                 numberFormatValidator,
                 overlapValidator,
-                spaceValidator,
                 zeroValidator
         );
     }
