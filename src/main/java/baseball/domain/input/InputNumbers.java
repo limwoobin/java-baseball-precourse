@@ -15,6 +15,7 @@ public class InputNumbers {
     }
 
     public InputNumbers receiveInputNumbers() {
+        clear();
         String inputValue = getUserInput();
         validationCheck.validate(inputValue);
         this.inputNumbers = stringToIntegerList(inputValue);
@@ -25,7 +26,7 @@ public class InputNumbers {
         return inputNumbers;
     }
 
-    public String getUserInput() {
+    private String getUserInput() {
         return Console.readLine();
     }
 
@@ -36,5 +37,9 @@ public class InputNumbers {
         }
 
         return inputNumbers;
+    }
+
+    private void clear() {
+        this.inputNumbers.clear();
     }
 }
