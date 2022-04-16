@@ -24,4 +24,8 @@ public class RestartInputNumber {
     private String getUserInput() {
         return Console.readLine();
     }
+
+    public boolean isRestart() {
+        return "1".equals(input);
+    }
 }

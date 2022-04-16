@@ -3,8 +3,12 @@ package baseball.game;
 import baseball.domain.BaseballNumbers;
 import baseball.domain.GameResult;
 import baseball.domain.input.InputNumbers;
+import baseball.domain.input.RestartInputNumber;
+import baseball.domain.input.validator.InputNumbersRestartValidator;
 import baseball.domain.score.impl.BallScoreFunction;
 import baseball.domain.score.impl.StrikeScoreFunction;
+import baseball.view.PrintGameOver;
+import baseball.view.PrintGameRestartInput;
 import baseball.view.PrintGameResult;
 import baseball.view.PrintUserInput;
 
@@ -22,6 +26,26 @@ public class BaseballGame {
 
             gameResult.calculateScore(inputNumbers, baseballNumbers);
             PrintGameResult.printMessage(gameResult);
+            checkTheGameResult(gameResult);
         }
+    }
+
+    private static void checkTheGameResult(GameResult gameResult) {
+        if (gameResult.isGameOver()) {
+            PrintGameOver.printMessage();
+            gameRestartOrQuit();
+        }
+    }
+
+    private static void gameRestartOrQuit() {
+        PrintGameRestartInput.printMessage();
+        RestartInputNumber restartInputNumber = new RestartInputNumber(new InputNumbersRestartValidator());
+        restartInputNumber.receivingRestartInputNumber();
+
+        if (restartInputNumber.isRestart()) {
+            BaseballGame.start();
+        }
+
+        System.exit(0);
     }
 }
