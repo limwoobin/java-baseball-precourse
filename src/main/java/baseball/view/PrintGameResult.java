@@ -9,6 +9,6 @@ public class PrintGameResult {
             return;
         }
 
-        System.out.println(gameResult.getStrikeCount() + " 스트라이크 ," + gameResult.getBallCount() + " 볼");
+        System.out.println(gameResult.getBallCount() + "볼 " + gameResult.getStrikeCount() + "스트라이크");
     }
 }
