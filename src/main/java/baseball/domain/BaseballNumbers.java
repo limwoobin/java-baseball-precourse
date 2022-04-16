@@ -5,18 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseballNumbers {
-    private final List<Integer> baseballNumber;
+    private List<Integer> baseballNumber;
 
     public BaseballNumbers() {
         this.baseballNumber = new ArrayList<>();
+        this.baseballNumber = createBaseballNumber();
     }
 
-    public List<Integer> createBaseballNumber() {
+    private List<Integer> createBaseballNumber() {
         while (this.baseballNumber.size() < 3) {
             int randomNumber = Randoms.pickNumberInRange(1,9);
             this.baseballNumber.add(randomNumber);
         }
 
         return this.baseballNumber;
+    }
+
+    public List<Integer> getBaseballNumber() {
+        return baseballNumber;
     }
 }
