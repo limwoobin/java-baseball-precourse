@@ -1,11 +1,13 @@
 package baseball;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 import baseball.domain.BaseballNumbers;
+import baseball.domain.GameResult;
 import baseball.domain.input.InputNumbers;
 import baseball.domain.score.ScoreFunction;
 import baseball.domain.score.impl.BallScoreFunction;
@@ -169,6 +171,28 @@ public class BaseballScoreTest {
 
             int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(3, result);
+        }
+    }
+
+    @Nested
+    @DisplayName("사용자가 값을 입력시 낫싱인지 판단하라")
+    class NothingTest {
+
+        @DisplayName("strike , out 이 모두 0이면 상태는 nothing이 된다")
+        @ParameterizedTest
+        @ValueSource(strings = {"246" , "467" , "798" , "876"})
+        void nothing_test(String input) {
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+
+            strikeFunctionMocking(input, 컴퓨터가_생성한_난수);
+            ballFunctionMocking(input, 컴퓨터가_생성한_난수);
+
+            GameResult gameResult = new GameResult();
+            gameResult.calculateScore(inputNumbers, baseballNumbers);
+
+            assertEquals(0, gameResult.getStrikeCount());
+            assertEquals(0, gameResult.getOutCount());
+            assertTrue(gameResult.isNothing());
         }
     }
 }
