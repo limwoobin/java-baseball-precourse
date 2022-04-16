@@ -1,7 +1,7 @@
 package baseball.domain.score.impl;
 
 import baseball.domain.BaseballNumbers;
-import baseball.domain.game.BaseballGame;
+import baseball.game.BaseballGame;
 import baseball.domain.input.InputNumbers;
 import baseball.domain.score.ScoreFunction;
 import java.util.List;
