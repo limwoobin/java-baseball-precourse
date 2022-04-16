@@ -39,18 +39,16 @@ public class BaseballScoreTest {
         console.close();
     }
 
-    void strikeFunctionMocking(String input) {
+    void strikeFunctionMocking(String input, List<Integer> 컴퓨터가_생성한_난수) {
         when(baseballNumbers.getBaseballNumber())
-                .thenReturn(Arrays.asList(1,3,5));
+                .thenReturn(컴퓨터가_생성한_난수);
         when(Console.readLine())
                 .thenReturn(input);
 
         inputNumbers.createInputNumbers();
     }
 
-    void ballFunctionMocking(String input) {
-        List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
-
+    void ballFunctionMocking(String input, List<Integer> 컴퓨터가_생성한_난수) {
         when(baseballNumbers.getBaseballNumber())
                 .thenReturn(컴퓨터가_생성한_난수);
         when(Console.readLine())
@@ -78,7 +76,8 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"246", "789" , "351" , "513"})
         void zero_strike_test(String input) {
-            strikeFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            strikeFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(0, result);
@@ -88,7 +87,8 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"124", "153" , "245" , "234"})
         void one_strike_test(String input) {
-            strikeFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            strikeFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(1, result);
@@ -98,7 +98,8 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"134", "125" , "138" , "235"})
         void two_strike_test(String input) {
-            strikeFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            strikeFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(2, result);
@@ -108,7 +109,8 @@ public class BaseballScoreTest {
         @Test
         void three_strike_test() {
             String input = "135";
-            strikeFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            strikeFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = strikeScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(3, result);
@@ -129,7 +131,8 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"246" , "135" , "137"})
         void zero_ball_test(String input) {
-            ballFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            ballFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(0, result);
@@ -139,7 +142,8 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"324" , "567" , "398"})
         void one_ball_test(String input) {
-            ballFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            ballFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(1, result);
@@ -149,7 +153,8 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"512", "514" , "312" , "359"})
         void two_ball_test(String input) {
-            ballFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            ballFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(2, result);
@@ -159,7 +164,8 @@ public class BaseballScoreTest {
         @ParameterizedTest
         @ValueSource(strings = {"513" , "351"})
         void three_ball_test(String input) {
-            ballFunctionMocking(input);
+            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+            ballFunctionMocking(input, 컴퓨터가_생성한_난수);
 
             int result = ballScoreFunction.execute(inputNumbers, baseballNumbers);
             assertEquals(3, result);
