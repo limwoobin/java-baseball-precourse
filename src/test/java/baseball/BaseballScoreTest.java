@@ -23,35 +23,55 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 
 public class BaseballScoreTest {
+    private MockedStatic<Console> console;
+    private BaseballNumbers baseballNumbers;
+    private InputNumbers inputNumbers;
+
+    @BeforeEach
+    void before() {
+        console = mockStatic(Console.class);
+        baseballNumbers = mock(BaseballNumbers.class);
+        inputNumbers = new InputNumbers();
+    }
+
+    @AfterEach
+    void after() {
+        console.close();
+    }
+
+    void strikeFunctionMocking(String input) {
+        when(baseballNumbers.getBaseballNumber())
+                .thenReturn(Arrays.asList(1,3,5));
+        when(Console.readLine())
+                .thenReturn(input);
+
+        inputNumbers.createInputNumbers();
+    }
+
+    void ballFunctionMocking(String input) {
+        List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
+
+        when(baseballNumbers.getBaseballNumber())
+                .thenReturn(컴퓨터가_생성한_난수);
+        when(Console.readLine())
+                .thenReturn(input);
+
+        List<Integer> 유저가_입력한_값 = inputNumbers.createInputNumbers();
+
+        for (int number : 유저가_입력한_값) {
+            when(baseballNumbers.isContains(number))
+                    .thenReturn(컴퓨터가_생성한_난수.contains(number));
+        }
+    }
 
     @Nested
     @DisplayName("사용자가 값을 입력시에 스트라이크가 몇개인지 리턴하라")
     class StrikeScoreTest {
-        private MockedStatic<Console> console;
-        private BaseballNumbers baseballNumbers;
-        private InputNumbers inputNumbers;
         private ScoreFunction strikeScoreFunction;
 
         @BeforeEach
-        void before() {
-            console = mockStatic(Console.class);
-            baseballNumbers = mock(BaseballNumbers.class);
-            inputNumbers = new InputNumbers();
+        void functionInit() {
             strikeScoreFunction = new StrikeScoreFunction();
-        }
-
-        @AfterEach
-        void after() {
-            console.close();
-        }
-
-        void strikeFunctionMocking(String input) {
-            when(baseballNumbers.getBaseballNumber())
-                    .thenReturn(Arrays.asList(1,3,5));
-            when(Console.readLine())
-                    .thenReturn(input);
-
-            inputNumbers.createInputNumbers();
         }
 
         @DisplayName("스트라이크가 0인 값을 입력하면 스트라이크값이 0으로 계산되서 리턴되어야 한다")
@@ -96,40 +116,13 @@ public class BaseballScoreTest {
     }
 
     @Nested
-    @DisplayName("사용자가 값을 입력시에 스트라이크가 몇개인지 리턴하라")
+    @DisplayName("사용자가 값을 입력시에 볼이 몇개인지 리턴하라")
     class BallScoreTest {
-        private MockedStatic<Console> console;
-        private BaseballNumbers baseballNumbers;
-        private InputNumbers inputNumbers;
         private ScoreFunction ballScoreFunction;
 
         @BeforeEach
         void before() {
-            console = mockStatic(Console.class);
-            baseballNumbers = mock(BaseballNumbers.class);
-            inputNumbers = new InputNumbers();
             ballScoreFunction = new BallScoreFunction();
-        }
-
-        @AfterEach
-        void after() {
-            console.close();
-        }
-
-        void ballFunctionMocking(String input) {
-            List<Integer> 컴퓨터가_생성한_난수 = Arrays.asList(1,3,5);
-
-            when(baseballNumbers.getBaseballNumber())
-                    .thenReturn(컴퓨터가_생성한_난수);
-            when(Console.readLine())
-                    .thenReturn(input);
-
-            List<Integer> 유저가_입력한_값 = inputNumbers.createInputNumbers();
-
-            for (int number : 유저가_입력한_값) {
-                when(baseballNumbers.isContains(number))
-                        .thenReturn(컴퓨터가_생성한_난수.contains(number));
-            }
         }
 
         @DisplayName("볼이 0인 값을 입력하면 볼값이 0으로 계산되서 리턴되어야 한다")
