@@ -11,7 +11,7 @@ public class InputNumbersOverlapValidator implements InputNumbersValidator {
         Set<String> set = new HashSet<>(Arrays.asList(splitInputNumbers));
 
         if (set.size() != 3) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력한 값은 중복되지 않아야 합니다.");
         }
     }
 }
