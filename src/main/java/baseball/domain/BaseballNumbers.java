@@ -1,20 +1,20 @@
 package baseball.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseballNumbers {
-    private final Set<String> baseballNumber;
+    private final List<Integer> baseballNumber;
 
     public BaseballNumbers() {
-        this.baseballNumber = new LinkedHashSet<>();
+        this.baseballNumber = new ArrayList<>();
     }
 
-    public Set<String> createBaseballNumber() {
+    public List<Integer> createBaseballNumber() {
         while (this.baseballNumber.size() < 3) {
             int randomNumber = Randoms.pickNumberInRange(1,9);
-            this.baseballNumber.add(String.valueOf(randomNumber));
+            this.baseballNumber.add(randomNumber);
         }
 
         return this.baseballNumber;
